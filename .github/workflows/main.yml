@@ -1,43 +1,51 @@
-# name: Deploy to Amazon ECS BBMS
+name: Deploy to Amazon ECS BBMS
 
-# on:
-#   push:
-#     branches: 
-#       - main
+on:
+  push:
+    branches: 
+      - main
 
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Use Node.js 18
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 18
 
-#       uses: actions/setup-node@v2
-#       with:
-#         node-version: 18
-#     - name: npm install and test
-#       run: |
-#         npm install --production
-#       env:
-#         CI: true
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+    - name: npm install and test
+      run: |
+        npm install --production
+      env:
+        CI: true
 
-#   deploy:
-#     needs: [test]
-#     runs-on: ubuntu-latest
+  deploy:
+    needs: [test]
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: SSH and deploy node app
-#       uses: appleboy/ssh-action@main
+    steps:
+    - name: SSH and deploy node app
+      uses: appleboy/ssh-action@main
 
-#       with:
-#         host: ${{secrets.SSH_HOST}}
-#         username: ${{secrets.SSH_USERNAME}}
-#         key: ${{secrets.SSH_KEY}}
-#         port: ${{secrets.SSH_PORT}}
-#         script: |
-#           cd //home/ubuntu/public.html/MERN_BBMS
-#           GIT_SSH_COMMAND='ssh -i
-#   /home/ubuntu/public.html/MERN_BBMS -o IdentitiesOnly=yes' git pull origin main
-#         pm2 restart BBMS
+      with:
+        host: ${{secrets.SSH_HOST}}
+        username: ${{secrets.SSH_USERNAME}}
+        key: ${{secrets.SSH_KEY}}
+        port: ${{secrets.SSH_PORT}}
+        script: |
+          cd //home/ubuntu/public.html/MERN_BBMS
+          GIT_SSH_COMMAND='ssh -i
+  /home/ubuntu/.ssh/AbhishekTech23 -o IdentitiesOnly=yes' git pull origin main
+  npm install --only = prod
+  pm2 describe MERN_BBMS > /dev/null
+
+  if[$? -eq 0]; then
+  pm2 restart MERN_BBMS --update -env
+
+  else
+  pm2 start server.js --name MERN_BBMS
+  fi
 
         
