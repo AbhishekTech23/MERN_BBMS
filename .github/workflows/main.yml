@@ -32,6 +32,10 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
+        aws-host: ${{secrets.SSH_HOST}}
+        aws-key: ${{secrets.SSH_KEY}}
+        aws-port: ${{secrets.SSH_PORT}}
+        aws-username: ${{secrets.SSH_USERNAME}}
 
         script: |
           cd /home/ubuntu/public.html/MERN_BBMS
