@@ -25,10 +25,7 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-
-    - name: Build the project
-      run: npm run build 
-
+      
     - name: Configure AWS credentials
       uses: appleboy/ssh-action@v0.1.8
       with:
