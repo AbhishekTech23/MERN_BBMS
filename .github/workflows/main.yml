@@ -25,17 +25,17 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      
+
     - name: Configure AWS credentials
       uses: appleboy/ssh-action@v0.1.8
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
-        aws-host: ${{secrets.SSH_HOST}}
-        aws-key: ${{secrets.SSH_KEY}}
-        aws-port: ${{secrets.SSH_PORT}}
-        aws-username: ${{secrets.SSH_USERNAME}}
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_region: ${{ env.AWS_REGION }}
+        aws_host: ${{secrets.SSH_HOST}}
+        aws_key: ${{secrets.SSH_KEY}}
+        aws_port: ${{secrets.SSH_PORT}}
+        aws_username: ${{secrets.SSH_USERNAME}}
 
         script: |
           cd /home/ubuntu/public.html/MERN_BBMS
